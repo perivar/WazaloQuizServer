@@ -29,8 +29,7 @@ app.post("/account", function(req, res) {
 });
 
 app.get("/mailchimp", function(req, res) {
-    res.send("MailChimp");
-
+   
 	let Mailchimp = require("mailchimp-api-3");
 	let mailchimp = new Mailchimp("4a408c02b1162fc49bf5840d6951455f-us15");
 
@@ -49,6 +48,8 @@ app.get("/mailchimp", function(req, res) {
     .catch( e => {
         // result e 
     })
+	
+	res.send("MailChimp succeeded!");
 });
 
 app.get("*", function(req, res) {

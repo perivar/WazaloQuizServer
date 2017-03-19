@@ -28,6 +28,29 @@ app.post("/account", function(req, res) {
     }
 });
 
+app.get("/mailchimp", function(req, res) {
+    res.send("MailChimp");
+
+	let Mailchimp = require("mailchimp-api-3");
+	let mailchimp = new Mailchimp("4a408c02b1162fc49bf5840d6951455f-us15");
+
+	mailchimp.members.create("44065f1e0a", {
+    email_address: "anne@nerseth.com",
+    merge_fields: {
+       EMAIL: "anne@nerseth.com",
+       USERNAME: "Anne Pernille Nerseth"
+    },
+    status: 'subscribed',
+        
+    })
+    .then( user => {
+        // result user 
+    })
+    .catch( e => {
+        // result e 
+    })
+});
+
 app.get("*", function(req, res) {
     res.end('Path Hit: ' + req.url);
 });

@@ -1,3 +1,5 @@
+var dotenv = require('dotenv').config();
+
 // Lets require/import the mongodb native drivers.
 var mongodb = require('mongodb');
 
@@ -5,7 +7,10 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 
 // Connection URL. This is where your mongodb server is running.
-var url = 'mongodb://localhost:27017/nodetest1';
+var url = process.env.MONGO_URL;
+
+// Collection name.
+var collection_name = process.env.MONGO_COLLECTION; 
 
 // Use connect method to connect to the Server
 MongoClient.connect(url, function (err, db) {
@@ -15,7 +20,7 @@ MongoClient.connect(url, function (err, db) {
     console.log('Connection established to', url);
 
     // Get the user collection
-    var collection = db.collection('usercollection');
+    var collection = db.collection(collection_name);
 
     // Find some users
     //collection.find().toArray(function (err, result) {

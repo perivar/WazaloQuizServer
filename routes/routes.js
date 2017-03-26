@@ -46,15 +46,18 @@ app.post("/account", function(req, res) {
 
 app.get("/mailchimp", function(req, res) {
    
-	let Mailchimp = require("mailchimp-api-3");
-	let mailchimp = new Mailchimp("4a408c02b1162fc49bf5840d6951455f-us15");
+	var mailChimpAPIKey = process.env.MAILCHIMP_API_KEY;
+	var mailChimpListId = process.env.MAILCHIMP_LIST_ID;
 
-	mailchimp.members.create("44065f1e0a", {
-    email_address: "anne@nerseth.com",
-    merge_fields: {
-       EMAIL: "anne@nerseth.com",
-       USERNAME: "Anne Pernille Nerseth"
-    },
+	let Mailchimp = require("mailchimp-api-3");
+	let mailchimp = new Mailchimp(mailChimpAPIKey);
+
+	mailchimp.members.create(mailChimpListId, {
+   		email_address: "perivar@nerseth.com",
+    		merge_fields: {
+       			EMAIL: "perivar@nerseth.com",
+       			USERNAME: "Per Ivar Nerseth"
+    		},
     status: 'subscribed',
         
     })

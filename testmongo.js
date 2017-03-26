@@ -1,7 +1,7 @@
-//lets require/import the mongodb native drivers.
+// Lets require/import the mongodb native drivers.
 var mongodb = require('mongodb');
 
-//We need to work with "MongoClient" interface in order to connect to a mongodb server.
+// We need to work with "MongoClient" interface in order to connect to a mongodb server.
 var MongoClient = mongodb.MongoClient;
 
 // Connection URL. This is where your mongodb server is running.
@@ -14,7 +14,7 @@ MongoClient.connect(url, function (err, db) {
   } else {
     console.log('Connection established to', url);
 
-    // Get the documents collection
+    // Get the user collection
     var collection = db.collection('usercollection');
 
     // Find some users
@@ -30,7 +30,7 @@ MongoClient.connect(url, function (err, db) {
       }
     });
 
-    //Close connection
+    // Close connection
     db.close();
   }
 });

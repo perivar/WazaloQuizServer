@@ -17,31 +17,7 @@ app.all('*', function(req, res, next) {
 });
  
 app.get("/", function(req, res) {
-    res.send("Hello World");
-});
-
-app.get("/account", function(req, res) {
-    var accountMock = {
-        "username": "user",
-        "password": "1234",
-        "twitter": "@user"
-    }
-
-    if(!req.query.username) {
-        return res.send({"status": "error", "message": "missing username"});
-    } else if(req.query.username != accountMock.username) {
-        return res.send({"status": "error", "message": "wrong username"});
-    } else {
-        return res.send(accountMock);
-    }
-});
-
-app.post("/account", function(req, res) {
-    if(!req.body.username || !req.body.password || !req.body.twitter) {
-        return res.send({"status": "error", "message": "missing a parameter"});
-    } else {
-        return res.send(req.body);
-    }
+    res.send("Quiz Server Ready!");
 });
 
 app.get("/mailchimp", function(req, res) {
@@ -71,12 +47,17 @@ app.get("/mailchimp", function(req, res) {
 	res.send("MailChimp succeeded!");
 });
 
+app.post("/quiz_admin", function(req, res) {
+    //console.log(req.body); // the posted data
+    res.send(JSON.stringify(req.body, null, 4));
+});
+
 app.get("*", function(req, res) {
     res.end('GET path: ' + req.url);
 });
 
 app.post("*", function(req, res) {
-    console.log(req.body); // the posted data
+    //console.log(req.body); // the posted data
     res.send(JSON.stringify(req.body, null, 4));
 });
 

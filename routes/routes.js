@@ -49,22 +49,25 @@ app.post("/quiz_admin", function(req, res) {
     //console.log(req.body); // the posted data
 
     var action = req.body.action;
-    console.log(action);
     if (action == "waz_qc_add_response") {
         //var quizId = req.body.quiz_id;
 	//var response = req.body.response;
         //console.log("Received response: " + response);
+
     } else if (action == "waz_qc_add_result") {
         //var quizId = req.body.quiz_id;
 	//var result = req.body.result;
         //console.log("Received result: " + result);
+
     } else if (action == "waz_qc_send_responses") {
         var quizId = req.body.quiz_id;
         var name = req.body.name;
         var email = req.body.email;
         var result = req.body.result;
         var responses = req.body.responses;
+
         console.log("Received responses: " + responses);
+
     } else if(action == "waz_qc_add_to_mailing_list") {
         var name = req.body.name;
         var email = req.body.email;
@@ -78,22 +81,24 @@ app.post("/quiz_admin", function(req, res) {
 	let mailchimp = new Mailchimp(mailChimpAPIKey);
 
 	mailchimp.members.create(mailChimpListId, {
-   		email_address: email,
+   		email_address: "anne@nerseth.com",
     		merge_fields: {
-       			EMAIL: email,
-       			USERNAME: name
+       			EMAIL: "anne@nerseth.com",
+       			USERNAME: "Anne Nerseth"
     		},
     		status: 'subscribed',
     		})
     		.then( user => {
         		// result user 
+        		console.log("Successfully subscribed: " + user);
     		})
     		.catch( e => {
         		// result e
-    	});
-        console.log("Subscribed to mailing list: " + name + " , " + email);
+        		console.log("Failed subscribing: " + e);
+    	})
     }
 
+    res.send("OK");
     //res.send(JSON.stringify(req.body, null, 4));
 });
 

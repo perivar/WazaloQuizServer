@@ -22,14 +22,14 @@ var appRouter = function(app) {
 	});
 
 	app.get("/mailchimp", function(req, res) {
-		
+
 		var name = req.query.name;
 		var email = req.query.email;
-								
+
 		if (undefined == name || undefined == email) {
 			res.send("Missing name or email...");
 		} else {
-			try {				
+			try {
 				// statements to try
 				var user = shared.MailChimpSubscribe(name, email);
 				res.send("MailChimp subscription succeeded: " + name + ":" + email + ". Feedback " + user);
@@ -61,23 +61,23 @@ var appRouter = function(app) {
 			var email = req.body.email;
 			var result = req.body.result;
 			var responses = req.body.responses;
-			console.log("Received responses: " + JSON.stringify(responses, null, 4));
+			//console.log("Received responses: " + JSON.stringify(responses, null, 4));
 			res.end("OK");
 
 		} else if (action == "waz_qc_add_to_mailing_list") {
 			var name = req.body.name;
 			var email = req.body.email;
 			//console.log("Received name and email: " + name + " , " + email);
-												
+
 			if (undefined == name || undefined == email) {
-				res.end("Missing name or email...");
+				res.end("FAILED: missing name or email");
 			} else {
-				try {				
+				try {
 					// statements to try
 					var user = shared.MailChimpSubscribe(name, email);
-					res.end("MailChimp subscription OK: " + name + ":" + email + ". Feedback " + user);
+					res.end("OK: " + name + ":" + email);
 				} catch (e) {
-					res.end("MailChimp subscription FAILED: " + name + ":" + email + ". Error: " + JSON.stringify(e, null, 4));
+					res.end("FAILED: " + name + ":" + email + ". Error: " + JSON.stringify(e, null, 4));
 				}
 			}
 		}

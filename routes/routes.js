@@ -55,7 +55,7 @@ var appRouter = function(app) {
 			//console.log("Received result: " + result);
 			res.end("OK");
 
-			} else if (action == "waz_qc_send_responses") {
+		} else if (action == "waz_qc_send_responses") {
 			var quizId = req.body.quiz_id;
 			var name = req.body.name;
 			var email = req.body.email;
@@ -64,8 +64,8 @@ var appRouter = function(app) {
 			console.log("Received responses: " + JSON.stringify(responses, null, 4));
 			res.end("OK");
 
-			} else if (action == "waz_qc_add_to_mailing_list") {
-			var name = areq.body.name;
+		} else if (action == "waz_qc_add_to_mailing_list") {
+			var name = req.body.name;
 			var email = req.body.email;
 			//console.log("Received name and email: " + name + " , " + email);
 												

@@ -5,7 +5,7 @@ var dotenv = require('dotenv');
 // We are using the dotenv library to load our environmental variables from the .env file. We don't have anything in the .env file for now, but we will soon.
 dotenv.load();
 
-var port = process.env.PORT;
+var port = process.env.PORT || 8080;
 
 var app = express();
 

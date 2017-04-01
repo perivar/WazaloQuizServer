@@ -1,4 +1,4 @@
-PORT=3000
+PORT=8080
 DB_HOST=localhost
 DB_NAME=my_db
 DB_USER=me
@@ -7,4 +7,3 @@ MAILCHIMP_API_KEY=
 MAILCHIMP_LIST_ID=
 MONGO_URL=mongodb://localhost:27017/testdb
 MONGO_COLLECTION=testcollection
-

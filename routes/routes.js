@@ -61,7 +61,7 @@ var appRouter = function(app) {
 			var email = req.body.email;
 			var result = req.body.result;
 			var responses = req.body.responses;
-			//console.log("Received responses: " + JSON.stringify(responses, null, 4));
+			console.log("Received responses: " + JSON.stringify(responses, null, 4));
 			res.end("OK");
 
 		} else if (action == "waz_qc_add_to_mailing_list") {

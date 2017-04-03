@@ -66,7 +66,7 @@ var appRouter = function(app) {
 			try {
 				// statements to try
 				var insertId = shared.AddToDatabase(name, email, responses);
-				res.end("OK DB: " + name + ":" + insertId);
+				res.end("OK DB: " + name);
 			} catch (e) {
 				res.end("FAILED: " + name + ". Error: " + JSON.stringify(e, null, 4));
 			}
@@ -82,7 +82,7 @@ var appRouter = function(app) {
 				try {
 					// statements to try
 					var user = shared.MailChimpSubscribe(name, email);
-					res.end("OK MAIL: " + name + ":" + email);
+					res.end("OK MAIL: " + email + ":" + user);
 				} catch (e) {
 					res.end("FAILED: " + name + ":" + email + ". Error: " + JSON.stringify(e, null, 4));
 				}

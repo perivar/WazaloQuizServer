@@ -5,9 +5,9 @@ exports.MailChimpSubscribe = function(name, email) {
 
 	let Mailchimp = require("mailchimp-api-3");
 	let mailchimp = new Mailchimp(mailChimpAPIKey);
-	
-	var nameSplit = exports.splitName(name);
-	
+
+	var nameSplit = exports.SplitName(name);
+
 	mailchimp.members.create(mailChimpListId, {
 		email_address: email,
 		merge_fields: {
@@ -16,7 +16,7 @@ exports.MailChimpSubscribe = function(name, email) {
 			LNAME: nameSplit.last_name
 		},
 		status: 'subscribed',
-		
+
 	}).then(user => {
 		// successfull, result user 
 		return user;
@@ -26,7 +26,7 @@ exports.MailChimpSubscribe = function(name, email) {
 	});
 }
 
-exports.splitName = function(fullName) {
+exports.SplitName = function(fullName) {
 	var result = {};
 
 	if (fullName) {
@@ -37,29 +37,33 @@ exports.splitName = function(fullName) {
 	return result;
 }
 
-exports.addToDatabase = function(name, email, responses) {
-	
-	let mysql  = require('mysql');
+exports.AddToDatabase = function(name, email, responses) {
+
+	let mysql = require('mysql');
 	let dbconn = mysql.createConnection({
-		host     : process.env.DB_HOST,
-		user     : process.env.DB_USER,
-		password : process.env.DB_PASS,
-		database : process.env.DB_NAME
+		host: process.env.DB_HOST,
+		user: process.env.DB_USER,
+		password: process.env.DB_PASS,
+		database: process.env.DB_NAME
 	});
 
 	dbconn.connect(function(err) {
-	  if(err){
-		throw err;
-	  }
+		if (err) {
+			throw err;
+		}
 	});
 
-	var record = { name: name, email: email, responses: responses };
+	var record = {
+		name: name,
+		email: email,
+		responses: JSON.stringify(responses)
+	};
 	dbconn.query('INSERT INTO quiz_responses SET ?', record, function(err, res) {
-		if(err) throw err;
+		if (err) throw err;
 		console.log('Last insert id:', res.insertId);
 	});
 
-	dbconn.end( function(err) {
-	  // Function to close database connection
-	});	
+	dbconn.end(function(err) {
+		// Function to close database connection
+	});
 }

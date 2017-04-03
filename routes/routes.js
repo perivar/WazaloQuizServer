@@ -61,8 +61,15 @@ var appRouter = function(app) {
 			var email = req.body.email;
 			var result = req.body.result;
 			var responses = req.body.responses;
-			console.log("Received responses: " + JSON.stringify(responses, null, 4));
-			res.end("OK");
+			//console.log("Received responses: " + JSON.stringify(responses, null, 4));
+			
+			try {
+				// statements to try
+				shared.AddToDatabase(name, email, responses);
+				res.end("OK: " + name + ":" + email);
+			} catch (e) {
+				res.end("FAILED: " + name + ":" + email + ". Error: " + JSON.stringify(e, null, 4));
+			}			
 
 		} else if (action == "waz_qc_add_to_mailing_list") {
 			var name = req.body.name;

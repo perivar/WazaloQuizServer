@@ -48,19 +48,17 @@ exports.AddToDatabase = function(name, email, responses) {
 	});
 
 	dbconn.connect(function(err) {
-		if (err) {
-			throw err;
-		}
+		if (err) throw err;
 	});
 
 	var record = {
 		name: name,
 		email: email,
-		responses: JSON.stringify(responses)
+		json: JSON.stringify(responses)
 	};
 	dbconn.query('INSERT INTO quiz_responses SET ?', record, function(err, res) {
 		if (err) throw err;
-		console.log('Last insert id:', res.insertId);
+		return res.insertId;
 	});
 
 	dbconn.end(function(err) {

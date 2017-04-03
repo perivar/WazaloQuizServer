@@ -62,14 +62,14 @@ var appRouter = function(app) {
 			var result = req.body.result;
 			var responses = req.body.responses;
 			//console.log("Received responses: " + JSON.stringify(responses, null, 4));
-			
+
 			try {
 				// statements to try
-				shared.AddToDatabase(name, email, responses);
-				res.end("OK: " + name + ":" + email);
+				var insertId = shared.AddToDatabase(name, email, responses);
+				res.end("OK DB: " + name + ":" + insertId);
 			} catch (e) {
-				res.end("FAILED: " + name + ":" + email + ". Error: " + JSON.stringify(e, null, 4));
-			}			
+				res.end("FAILED: " + name + ". Error: " + JSON.stringify(e, null, 4));
+			}
 
 		} else if (action == "waz_qc_add_to_mailing_list") {
 			var name = req.body.name;
@@ -82,7 +82,7 @@ var appRouter = function(app) {
 				try {
 					// statements to try
 					var user = shared.MailChimpSubscribe(name, email);
-					res.end("OK: " + name + ":" + email);
+					res.end("OK MAIL: " + name + ":" + email);
 				} catch (e) {
 					res.end("FAILED: " + name + ":" + email + ". Error: " + JSON.stringify(e, null, 4));
 				}

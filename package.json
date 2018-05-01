@@ -1,21 +1,32 @@
 {
-  "name": "wazalo_quiz_server",
+  "name": "wazaloquizserver",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Wazalo Quiz Server",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perivar/WazaloQuizServer.git"
+  },
+  "keywords": [
+    "Quiz",
+    "Server"
+  ],
+  "author": "Per Ivar Nerseth",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/perivar/WazaloQuizServer/issues"
+  },
+  "homepage": "https://github.com/perivar/WazaloQuizServer#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "dotenv": "^4.0.0",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
-    "mailchimp-api": "^2.0.7",
-    "mailchimp-api-3": "0.0.8",
-    "mongodb": "^2.2.35",
+    "mailchimp-api-3": "0.0.9",
+    "mongodb": "^3.0.7",
     "mysql": "^2.15.0",
     "request": "^2.85.0"
   }
